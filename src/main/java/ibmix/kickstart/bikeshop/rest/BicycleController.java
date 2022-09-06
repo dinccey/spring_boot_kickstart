@@ -14,10 +14,10 @@ import javax.persistence.EntityManager;
 public class BicycleController {
 
     @Autowired
-    BicycleRepository bicycleRepository;
+    private BicycleRepository bicycleRepository;
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @PostMapping(value="/bicycles",consumes = "application/json", produces = "application/json")
     public Bicycle newBicycle(@RequestBody Bicycle bicycle){
