@@ -20,7 +20,7 @@ public class BicycleController {
     private EntityManager entityManager;
 
     @PostMapping(value="/bicycles",consumes = "application/json", produces = "application/json")
-    public Bicycle newBicycle(@RequestBody Bicycle bicycle){
+    public Bicycle newBicycle(@RequestBody final Bicycle bicycle){
         Brand brand = entityManager.getReference(Brand.class, bicycle.getBrand().getName());
         bicycle.setBrand(brand);
         return bicycleRepository.save(bicycle);
