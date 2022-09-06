@@ -12,26 +12,26 @@ import javax.persistence.Table;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @Entity
-@Table(name = "Marka", schema = "public", catalog = "ibmix")
-public class Marka {
+@Table(name = "Brand", schema = "public", catalog = "ibmix")
+public class Brand {
 
     @Getter
     @Setter
     @Id
-    @Column(name = "naziv", nullable = false, length = 20)
-    private String naziv;
+    @Column(name = "name", nullable = false, length = 20)
+    private String name;
 
     @Getter
     @Setter
-    @Column(name="opis",length = 500)
-    private String opis;
+    @Column(name="description",length = 500)
+    private String description;
 
     @Getter
     @Setter
     @Column(name="web",length = 100)
     private String web;
 
-    public Marka() {
+    public Brand() {
 
     }
 }

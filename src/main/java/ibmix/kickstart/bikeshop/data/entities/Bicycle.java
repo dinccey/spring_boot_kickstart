@@ -9,8 +9,8 @@ import javax.persistence.*;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @AllArgsConstructor
 @Entity
-@Table(name = "Bicikl", schema = "public", catalog = "ibmix")
-public class Bicikl {
+@Table(name = "Bicycle", schema = "public", catalog = "ibmix")
+public class Bicycle {
     @Getter
     @Setter
     @Id
@@ -20,26 +20,26 @@ public class Bicikl {
 
     @Getter
     @Setter
-    @Column(name="ime", length=50, nullable=false)
-    private String ime;
+    @Column(name="name", length=50, nullable=false)
+    private String name;
 
     @Getter
     @Setter
     @ManyToOne
-    @JoinColumn(name = "marka",referencedColumnName = "naziv")
-    private Marka marka;
+    @JoinColumn(name = "brand",referencedColumnName = "name")
+    private Brand brand;
 
     @Getter
     @Setter
-    @Column(name = "cijena",nullable = false)
-    private double cijena;
+    @Column(name = "price",nullable = false)
+    private double price;
 
     @Getter
     @Setter
-    @Column(name = "boja", length = 20)
-    private String boja;
+    @Column(name = "color", length = 20)
+    private String color;
 
-    public Bicikl() {
+    public Bicycle() {
 
     }
 }

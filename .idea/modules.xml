@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/spring_boot_kickstart.iml" filepath="$PROJECT_DIR$/.idea/spring_boot_kickstart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bikeshop.iml" filepath="$PROJECT_DIR$/bikeshop.iml" />
     </modules>
   </component>
 </project>

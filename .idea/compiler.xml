@@ -8,14 +8,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="spring_boot_kickstart" />
+        <module name="bikeshop" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="bikeshop" target="11" />
       <module name="spring_boot_kickstart" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="bikeshop" options="-parameters" />
       <module name="spring_boot_kickstart" options="-parameters" />
     </option>
   </component>
