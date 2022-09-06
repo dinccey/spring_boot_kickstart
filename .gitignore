@@ -161,3 +161,13 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,maven,java
 
+.idea
+frontend
+bikeshop.iml
+HELP.md
+package-lock.json
+package.json
+tsconfig.json
+types.d.ts
+vite.generated.ts
+vite.config.ts
