@@ -31,7 +31,7 @@ public class BicycleController {
     }
 
     @DeleteMapping(value = "/bicycles/{id}")
-    public void deleteBicycle(@PathVariable Long id){
+    public void deleteBicycle(@PathVariable final Long id){
         bicycleRepository.deleteById(id);
     }
 }
