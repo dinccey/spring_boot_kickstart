@@ -29,4 +29,9 @@ public class BicycleController {
     public @ResponseBody List<Bicycle> getAllBicycles(){
         return bicycleRepository.findAll();
     }
+
+    @DeleteMapping(value = "/bicycles/{id}")
+    public void deleteBicycle(@PathVariable Long id){
+        bicycleRepository.deleteById(id);
+    }
 }
