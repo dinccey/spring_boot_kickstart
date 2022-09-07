@@ -1,7 +1,7 @@
 package ibmix.kickstart.bikeshop.service.implementation;
 
-import ibmix.kickstart.bikeshop.repository.entities.Bicycle;
-import ibmix.kickstart.bikeshop.repository.entities.Brand;
+import ibmix.kickstart.bikeshop.repository.entities.BicycleModel;
+import ibmix.kickstart.bikeshop.repository.entities.BrandModel;
 import ibmix.kickstart.bikeshop.repository.BicycleRepository;
 import ibmix.kickstart.bikeshop.service.BicycleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,38 +17,38 @@ import java.util.Optional;
 public class BicycleServiceImpl implements BicycleService{
 
     @Autowired
-    BicycleRepository repository;
+    private BicycleRepository bicycleRepository;
 
     @Autowired
     private EntityManager entityManager;
 
-    public List<Bicycle> getAllBicycles(){
-        return repository.findAll();
+    public List<BicycleModel> getAllBicycles(){
+        return bicycleRepository.findAll();
     }
 
-    public Bicycle addBicycle(Bicycle bicycle){
-        Brand brand = entityManager.getReference(Brand.class, bicycle.getBrand().getName());
+    public BicycleModel addBicycle(final BicycleModel bicycle){
+        BrandModel brand = entityManager.getReference(BrandModel.class, bicycle.getBrand().getName());
         bicycle.setBrand(brand);
-        return repository.save(bicycle);
+        return bicycleRepository.save(bicycle);
     }
 
-    public void deleteBicycle(Long id){
-        repository.deleteById(id);
+    public void deleteBicycle(final Long id){
+        bicycleRepository.deleteById(id);
     }
 
-    public Optional<Bicycle> getBicycleById(Long id){
-        return repository.findById(id);
+    public Optional<BicycleModel> getBicycleById(final Long id){
+        return bicycleRepository.findById(id);
     }
-    public List<Bicycle> getBicyclesByBrand(String brandName){
-        return repository.findAllByBrand_Name(brandName);
+    public List<BicycleModel> getBicyclesByBrand(final String brandName){
+        return bicycleRepository.findAllByBrand_Name(brandName);
     }
 
-    public Bicycle updateBicycle(Bicycle updatedBicycle) throws ResponseStatusException {
-        Optional<Bicycle> bicycle = repository.findById(updatedBicycle.getId());
+    public BicycleModel updateBicycle(final BicycleModel updatedBicycle) throws ResponseStatusException {
+        Optional<BicycleModel> bicycle = bicycleRepository.findById(updatedBicycle.getId());
         if(bicycle.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_MODIFIED,
                     "Bicycle with id"+updatedBicycle.getId()+" does not exist in the database.\n");
         }
-        return repository.save(updatedBicycle);
+        return bicycleRepository.save(updatedBicycle);
     }
 }

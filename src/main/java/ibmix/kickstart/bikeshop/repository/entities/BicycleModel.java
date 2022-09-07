@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "Bicycle", schema = "public", catalog = "ibmix")
-public class Bicycle {
+public class BicycleModel {
     @Getter
     @Setter
     @Id
@@ -27,7 +27,7 @@ public class Bicycle {
     @Setter
     @ManyToOne
     @JoinColumn(name = "brand",referencedColumnName = "name")
-    private Brand brand;
+    private BrandModel brand;
 
     @Getter
     @Setter
@@ -39,7 +39,7 @@ public class Bicycle {
     @Column(name = "color", length = 20)
     private String color;
 
-    public Bicycle() {
+    public BicycleModel() {
 
     }
 }
