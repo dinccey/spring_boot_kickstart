@@ -46,5 +46,9 @@ public class BicycleController {
         }
         return bicycleRepository.save(updatedBicycle);
     }
+    @GetMapping(value = "/bicycles/{id}")
+    public Optional<Bicycle> getBicycle(@PathVariable final Long id){
+        return bicycleRepository.findById(id);
+    }
 
 }
