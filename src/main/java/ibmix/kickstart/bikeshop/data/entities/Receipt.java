@@ -30,8 +30,8 @@ public class Receipt {
     @Setter
     @ManyToMany
     @JoinTable(
-            name = "receit_bicycles",
-            joinColumns = @JoinColumn(name = "receit_id"),
+            name = "receipt_bicycles",
+            joinColumns = @JoinColumn(name = "receipt_id"),
             inverseJoinColumns = @JoinColumn(name = "bicycle_id"))
     private Set<Bicycle> items;
 
