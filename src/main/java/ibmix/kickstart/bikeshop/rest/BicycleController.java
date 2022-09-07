@@ -53,7 +53,7 @@ public class BicycleController {
 
     @GetMapping(value="/bicycles/brand/{brand}")
     public List<Bicycle> getBicyclesByBrand(@PathVariable final String brand){
-        return bicycleRepository.bicyclesByBrand(brand);
+        return bicycleRepository.findAllByBrand_Name(brand);
     }
 
 
