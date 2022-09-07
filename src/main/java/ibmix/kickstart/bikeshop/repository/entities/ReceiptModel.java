@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "Receipt", schema = "public", catalog = "ibmix")
-public class Receipt {
+public class ReceiptModel {
     @Getter
     @Setter
     @Id
@@ -33,14 +33,14 @@ public class Receipt {
             name = "receipt_bicycles",
             joinColumns = @JoinColumn(name = "receipt_id"),
             inverseJoinColumns = @JoinColumn(name = "bicycle_id"))
-    private Set<Bicycle> items;
+    private Set<BicycleModel> items;
 
     @Getter
     @Setter
     @Column(name = "price_total")
     private double priceTotal;
 
-    public Receipt() {
+    public ReceiptModel() {
 
     }
 }

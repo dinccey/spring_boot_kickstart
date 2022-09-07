@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Table(name = "Brand", schema = "public", catalog = "ibmix")
-public class Brand {
+public class BrandModel {
 
     @Getter
     @Setter
@@ -31,7 +31,7 @@ public class Brand {
     @Column(name="web",length = 100)
     private String web;
 
-    public Brand() {
+    public BrandModel() {
 
     }
 }

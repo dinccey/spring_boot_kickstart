@@ -1,26 +1,24 @@
 package ibmix.kickstart.bikeshop.service;
 
-import ibmix.kickstart.bikeshop.repository.entities.Bicycle;
-import ibmix.kickstart.bikeshop.repository.entities.Receipt;
+import ibmix.kickstart.bikeshop.repository.entities.BicycleModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public interface BicycleService {
-    Bicycle addBicycle(Bicycle bicycle);
+    BicycleModel addBicycle(BicycleModel bicycle);
 
-    List<Bicycle> getAllBicycles();
+    List<BicycleModel> getAllBicycles();
 
     void deleteBicycle(Long id);
 
-    Bicycle updateBicycle(Bicycle updatedBicycle);
+    BicycleModel updateBicycle(BicycleModel updatedBicycle);
 
-    Optional<Bicycle> getBicycleById(Long id);
+    Optional<BicycleModel> getBicycleById(Long id);
 
-    List<Bicycle> getBicyclesByBrand(String brand);
+    List<BicycleModel> getBicyclesByBrand(String brand);
 
 
 }
