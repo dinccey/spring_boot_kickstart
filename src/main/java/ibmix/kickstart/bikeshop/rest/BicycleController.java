@@ -51,4 +51,11 @@ public class BicycleController {
         return bicycleRepository.findById(id);
     }
 
+    @GetMapping(value="/bicycles/brand/{brand}")
+    public List<Bicycle> getBicyclesByBrand(@PathVariable final String brand){
+        return bicycleRepository.bicyclesByBrand(brand);
+    }
+
+
+
 }
