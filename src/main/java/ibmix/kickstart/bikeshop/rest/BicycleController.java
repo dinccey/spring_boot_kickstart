@@ -3,6 +3,7 @@ package ibmix.kickstart.bikeshop.rest;
 import ibmix.kickstart.bikeshop.repository.entities.Bicycle;
 import ibmix.kickstart.bikeshop.repository.entities.Receipt;
 import ibmix.kickstart.bikeshop.service.BicycleService;
+import ibmix.kickstart.bikeshop.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,9 @@ public class BicycleController {
 
     @Autowired
     private BicycleService bicycleService;
+
+    @Autowired
+    private ReceiptService receiptService;
 
     @PostMapping(value="/bicycles",consumes = "application/json", produces = "application/json")
     public Bicycle newBicycle(@RequestBody final Bicycle bicycle){
@@ -46,7 +50,7 @@ public class BicycleController {
 
     @PostMapping(value = "bicycles/purchase")
     public Receipt purchaseBicycles(@RequestBody final Set<Bicycle> bicycles){
-        return bicycleService.purchaseBicycles(bicycles);
+        return receiptService.purchaseBicycles(bicycles);
     }
 
 

@@ -24,9 +24,6 @@ public class BicycleServiceImpl implements BicycleService{
     BicycleRepository bicycleRepository;
 
     @Autowired
-    ReceiptRepository receiptRepository;
-
-    @Autowired
     private EntityManager entityManager;
 
     public List<Bicycle> getAllBicycles(){
@@ -48,18 +45,6 @@ public class BicycleServiceImpl implements BicycleService{
     }
     public List<Bicycle> getBicyclesByBrand(String brandName){
         return bicycleRepository.findAllByBrand_Name(brandName);
-    }
-
-    public Receipt purchaseBicycles(Set<Bicycle> bicycles) {
-        Receipt receipt = new Receipt();
-        Date dateOfPurchase = new Date(System.currentTimeMillis());
-        double totalPrice = bicycles.stream().mapToDouble(Bicycle::getPrice).sum();
-
-        receipt.setItems(bicycles);
-        receipt.setPriceTotal(totalPrice);
-        receipt.setDateOfPurchase(dateOfPurchase);
-
-        return receiptRepository.save(receipt);
     }
 
     public Bicycle updateBicycle(Bicycle updatedBicycle) throws ResponseStatusException {

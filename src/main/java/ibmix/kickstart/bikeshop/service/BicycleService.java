@@ -22,5 +22,5 @@ public interface BicycleService {
 
     List<Bicycle> getBicyclesByBrand(String brand);
 
-    Receipt purchaseBicycles(Set<Bicycle> bicycles);
+
 }
