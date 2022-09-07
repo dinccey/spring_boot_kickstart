@@ -1,12 +1,14 @@
 package ibmix.kickstart.bikeshop.rest;
 
 import ibmix.kickstart.bikeshop.repository.entities.Bicycle;
+import ibmix.kickstart.bikeshop.repository.entities.Receipt;
 import ibmix.kickstart.bikeshop.service.BicycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class BicycleController {
@@ -42,6 +44,10 @@ public class BicycleController {
         return bicycleService.getBicyclesByBrand(brand);
     }
 
+    @PostMapping(value = "bicycles/purchase")
+    public Receipt purchaseBicycles(@RequestBody final Set<Bicycle> bicycles){
+        return bicycleService.purchaseBicycles(bicycles);
+    }
 
 
 }
