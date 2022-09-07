@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface BicycleRepository extends JpaRepository<Bicycle,Long> {
     @Query("SELECT b FROM Bicycle b WHERE b.brand.name = ?1")
-    List<Bicycle> bicyclesByBrand(String brandName);
+    List<Bicycle> bicyclesByBrand(final String brandName);
 }
