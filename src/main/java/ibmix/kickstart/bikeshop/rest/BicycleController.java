@@ -37,7 +37,7 @@ public class BicycleController {
     public void deleteBicycle(@PathVariable final Long id){
         bicycleRepository.deleteById(id);
     }
-    @PostMapping(value = "/bicycles/update")
+    @PutMapping(value = "/bicycles")
     public Bicycle updateBicycle(@RequestBody final Bicycle updatedBicycle){
         Optional<Bicycle> bicycle = bicycleRepository.findById(updatedBicycle.getId());
         if(bicycle.isEmpty()) {
