@@ -4,10 +4,13 @@ import ibmix.kickstart.bikeshop.data.entities.Bicycle;
 import ibmix.kickstart.bikeshop.data.entities.Brand;
 import ibmix.kickstart.bikeshop.data.repositories.BicycleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class BicycleController {
@@ -34,4 +37,14 @@ public class BicycleController {
     public void deleteBicycle(@PathVariable final Long id){
         bicycleRepository.deleteById(id);
     }
+    @PostMapping(value = "/bicycles/update")
+    public Bicycle updateBicycle(@RequestBody final Bicycle updatedBicycle){
+        Optional<Bicycle> bicycle = bicycleRepository.findById(updatedBicycle.getId());
+        if(bicycle.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_MODIFIED,
+                    "Bicycle with id"+updatedBicycle.getId()+" does not exist in the database.\n");
+        }
+        return bicycleRepository.save(updatedBicycle);
+    }
+
 }
