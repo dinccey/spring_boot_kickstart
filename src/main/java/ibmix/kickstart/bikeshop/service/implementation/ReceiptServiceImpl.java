@@ -12,10 +12,11 @@ import java.util.Set;
 
 @Service
 public class ReceiptServiceImpl implements ReceiptService {
-    @Autowired
-    ReceiptRepository receiptRepository;
 
-    public ReceiptModel purchaseBicycles(Set<BicycleModel> bicycles) {
+    @Autowired
+    private ReceiptRepository receiptRepository;
+
+    public ReceiptModel purchaseBicycles(final Set<BicycleModel> bicycles) {
         ReceiptModel receipt = new ReceiptModel();
         Date dateOfPurchase = new Date(System.currentTimeMillis());
         double totalPrice = bicycles.stream().mapToDouble(BicycleModel::getPrice).sum();

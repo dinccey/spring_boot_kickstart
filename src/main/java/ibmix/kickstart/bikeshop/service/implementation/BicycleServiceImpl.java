@@ -17,7 +17,7 @@ import java.util.Optional;
 public class BicycleServiceImpl implements BicycleService{
 
     @Autowired
-    BicycleRepository bicycleRepository;
+    private BicycleRepository bicycleRepository;
 
     @Autowired
     private EntityManager entityManager;
@@ -26,24 +26,24 @@ public class BicycleServiceImpl implements BicycleService{
         return bicycleRepository.findAll();
     }
 
-    public BicycleModel addBicycle(BicycleModel bicycle){
+    public BicycleModel addBicycle(final BicycleModel bicycle){
         BrandModel brand = entityManager.getReference(BrandModel.class, bicycle.getBrand().getName());
         bicycle.setBrand(brand);
         return bicycleRepository.save(bicycle);
     }
 
-    public void deleteBicycle(Long id){
+    public void deleteBicycle(final Long id){
         bicycleRepository.deleteById(id);
     }
 
-    public Optional<BicycleModel> getBicycleById(Long id){
+    public Optional<BicycleModel> getBicycleById(final Long id){
         return bicycleRepository.findById(id);
     }
-    public List<BicycleModel> getBicyclesByBrand(String brandName){
+    public List<BicycleModel> getBicyclesByBrand(final String brandName){
         return bicycleRepository.findAllByBrand_Name(brandName);
     }
 
-    public BicycleModel updateBicycle(BicycleModel updatedBicycle) throws ResponseStatusException {
+    public BicycleModel updateBicycle(final BicycleModel updatedBicycle) throws ResponseStatusException {
         Optional<BicycleModel> bicycle = bicycleRepository.findById(updatedBicycle.getId());
         if(bicycle.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_MODIFIED,
