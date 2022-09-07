@@ -34,7 +34,7 @@ public class BicycleController {
     }
     @GetMapping(value = "/bicycles/{id}")
     public Optional<Bicycle> getBicycle(@PathVariable final Long id){
-        return bicycleService.getOneBicycle(id);
+        return bicycleService.getBicycleById(id);
     }
 
     @GetMapping(value="/bicycles/brand/{brand}")

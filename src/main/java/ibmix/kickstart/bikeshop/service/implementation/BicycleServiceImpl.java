@@ -15,8 +15,10 @@ import java.util.Optional;
 
 @Service
 public class BicycleServiceImpl implements BicycleService{
+
     @Autowired
     BicycleRepository repository;
+
     @Autowired
     private EntityManager entityManager;
 
@@ -34,7 +36,7 @@ public class BicycleServiceImpl implements BicycleService{
         repository.deleteById(id);
     }
 
-    public Optional<Bicycle> getOneBicycle(Long id){
+    public Optional<Bicycle> getBicycleById(Long id){
         return repository.findById(id);
     }
     public List<Bicycle> getBicyclesByBrand(String brandName){

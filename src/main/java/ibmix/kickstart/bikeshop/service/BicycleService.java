@@ -16,7 +16,7 @@ public interface BicycleService {
 
     Bicycle updateBicycle(Bicycle updatedBicycle);
 
-    Optional<Bicycle> getOneBicycle(Long id);
+    Optional<Bicycle> getBicycleById(Long id);
 
     List<Bicycle> getBicyclesByBrand(String brand);
 }
