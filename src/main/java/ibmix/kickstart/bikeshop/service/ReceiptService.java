@@ -4,6 +4,7 @@ import ibmix.kickstart.bikeshop.repository.entities.BicycleModel;
 import ibmix.kickstart.bikeshop.repository.entities.ReceiptModel;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 @Service
@@ -11,4 +12,6 @@ public interface ReceiptService {
     ReceiptModel purchaseBicycles(Set<BicycleModel> bicycles);
 
     List<ReceiptModel> getAllReceipts();
+
+    List<ReceiptModel> getReceiptsByDate(Date date);
 }

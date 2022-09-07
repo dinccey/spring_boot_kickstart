@@ -33,4 +33,9 @@ public class ReceiptServiceImpl implements ReceiptService {
     public List<ReceiptModel> getAllReceipts() {
         return receiptRepository.findAll();
     }
+
+    @Override
+    public List<ReceiptModel> getReceiptsByDate(final Date date) {
+        return receiptRepository.findAllByDateOfPurchase(date);
+    }
 }
