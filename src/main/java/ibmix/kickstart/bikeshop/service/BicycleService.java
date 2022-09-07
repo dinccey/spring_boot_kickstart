@@ -14,40 +14,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BicycleService {
-    @Autowired
-    BicycleRepository repository;
-    @Autowired
-    private EntityManager entityManager;
+public interface BicycleService {
+    Bicycle addBicycle(Bicycle bicycle);
 
-    public List<Bicycle> getAllBicycles(){
-        return repository.findAll();
-    }
+    List<Bicycle> getAllBicycles();
 
-    public Bicycle addBicycle(Bicycle bicycle){
-        Brand brand = entityManager.getReference(Brand.class, bicycle.getBrand().getName());
-        bicycle.setBrand(brand);
-        return repository.save(bicycle);
-    }
+    void deleteBicycle(Long id);
 
-    public void deleteBicycle(Long id){
-        repository.deleteById(id);
-    }
+    Bicycle updateBicycle(Bicycle updatedBicycle);
 
-    public Optional<Bicycle> getOneBicycle(Long id){
-        return repository.findById(id);
-    }
-    public List<Bicycle> getBicyclesByBrand(String brandName){
-        return repository.findAllByBrand_Name(brandName);
-    }
+    Optional<Bicycle> getOneBicycle(Long id);
 
-    public Bicycle updateBicycle(Bicycle updatedBicycle) throws ResponseStatusException{
-        Optional<Bicycle> bicycle = repository.findById(updatedBicycle.getId());
-        if(bicycle.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_MODIFIED,
-                    "Bicycle with id"+updatedBicycle.getId()+" does not exist in the database.\n");
-        }
-        return repository.save(updatedBicycle);
-    }
-
+    List<Bicycle> getBicyclesByBrand(String brand);
 }
