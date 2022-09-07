@@ -1,13 +1,12 @@
 package ibmix.kickstart.bikeshop.service.implementation;
 
-import ibmix.kickstart.bikeshop.data.entities.Bicycle;
-import ibmix.kickstart.bikeshop.data.entities.Brand;
-import ibmix.kickstart.bikeshop.data.repositories.BicycleRepository;
+import ibmix.kickstart.bikeshop.repository.entities.Bicycle;
+import ibmix.kickstart.bikeshop.repository.entities.Brand;
+import ibmix.kickstart.bikeshop.repository.BicycleRepository;
 import ibmix.kickstart.bikeshop.service.BicycleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityManager;
