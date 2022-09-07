@@ -4,11 +4,10 @@ import ibmix.kickstart.bikeshop.data.entities.Bicycle;
 import ibmix.kickstart.bikeshop.data.entities.Brand;
 import ibmix.kickstart.bikeshop.data.repositories.BicycleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @RestController
 public class BicycleController {
@@ -24,5 +23,10 @@ public class BicycleController {
         Brand brand = entityManager.getReference(Brand.class, bicycle.getBrand().getName());
         bicycle.setBrand(brand);
         return bicycleRepository.save(bicycle);
+    }
+
+    @GetMapping(value = "/bicycles",produces = "application/json")
+    public @ResponseBody List<Bicycle> getAllBicycles(){
+        return bicycleRepository.findAll();
     }
 }

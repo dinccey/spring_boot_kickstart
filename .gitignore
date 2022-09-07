@@ -160,3 +160,11 @@ buildNumber.properties
 .classpath
 # End of https://www.toptal.com/developers/gitignore/api/intellij,maven,java
 
+.idea
+vite.config.ts
+vite.generated.ts
+types.d.ts
+tsconfig.json
+package-lock.json
+bikeshop.iml
+frontend
