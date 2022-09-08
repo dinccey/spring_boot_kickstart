@@ -9,9 +9,8 @@ import ibmix.kickstart.bikeshop.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
@@ -35,13 +34,20 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     private static void getSoldValuePerColor(HashMap<String, Double> valuesByColor, List<ReceiptModel> allReceipts) {
+        Date date = new Date(System.currentTimeMillis());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
         for (ReceiptModel r: allReceipts) {
-            for (BicycleModel b:r.getItems()) {
-                if(valuesByColor.containsKey(b.getColor())){
-                    double priceValue = valuesByColor.get(b.getColor());
-                    valuesByColor.put(b.getColor(), priceValue + b.getPrice());
-                } else{
-                    valuesByColor.put(b.getColor(), b.getPrice());
+            calendar.setTime(r.getDateOfPurchase());
+            if(calendar.get(Calendar.YEAR) == year){
+                for (BicycleModel b:r.getItems()) {
+                    if(valuesByColor.containsKey(b.getColor())){
+                        double priceValue = valuesByColor.get(b.getColor());
+                        valuesByColor.put(b.getColor(), priceValue + b.getPrice());
+                    } else{
+                        valuesByColor.put(b.getColor(), b.getPrice());
+                    }
                 }
             }
         }
