@@ -1,9 +1,11 @@
-package ibmix.kickstart.bikeshop.repository.view;
+package ibmix.kickstart.bikeshop.repository.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Color {
+@AllArgsConstructor
+public class ColorModel {
     @Getter
     @Setter
     private String color;
@@ -15,4 +17,6 @@ public class Color {
     @Getter
     @Setter
     private double colorValueSum;
+
+    public ColorModel() {}
 }
