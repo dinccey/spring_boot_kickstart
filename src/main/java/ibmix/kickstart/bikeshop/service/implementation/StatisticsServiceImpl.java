@@ -1,11 +1,8 @@
 package ibmix.kickstart.bikeshop.service.implementation;
 
 import ibmix.kickstart.bikeshop.repository.ReceiptRepository;
-import ibmix.kickstart.bikeshop.repository.data.BrandStatisticsModel;
 import ibmix.kickstart.bikeshop.repository.entities.BicycleModel;
 import ibmix.kickstart.bikeshop.repository.entities.ReceiptModel;
-import ibmix.kickstart.bikeshop.repository.data.ColorModel;
-import ibmix.kickstart.bikeshop.repository.data.StatisticsViewModel;
 import ibmix.kickstart.bikeshop.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,29 +17,28 @@ public class StatisticsServiceImpl implements StatisticsService {
     private ReceiptRepository receiptRepository;
 
     @Override
-    public StatisticsViewModel getStatistics() {
+    public HashMap<String, Object> getStatistics() {
         HashMap<String,Double> valuesByColor = new HashMap();
         HashMap<String,Double> valuesByBrand = new HashMap();
-        StatisticsViewModel statisticsViewModel = new StatisticsViewModel();
+        HashMap<String, Object> statisticsView = new HashMap<>();
 
         List<ReceiptModel> allReceipts = receiptRepository.findAll();
         double totalSoldValue = allReceipts.stream().mapToDouble(ReceiptModel::getPriceTotal).sum();
 
-        getSoldValuePerUnit(valuesByColor, allReceipts,0);
-        getSoldValuePerUnit(valuesByBrand, allReceipts,1);
+        getSoldValuePerUnit_Color(valuesByColor, allReceipts);
+        getSoldValuePerUnit_Brand(valuesByBrand, allReceipts);
 
-        List<ColorModel> bicycleColorsValuePartition = new ArrayList<>();
-        valuesByColor.forEach((key, value) -> bicycleColorsValuePartition.add(new ColorModel(key,calculateColorPercentage(value,totalSoldValue),value)));
-        List<BrandStatisticsModel> bicycleBrandsValuePartition = new ArrayList<>();
-        valuesByBrand.forEach((key, value) -> bicycleBrandsValuePartition.add(new BrandStatisticsModel(key,calculateColorPercentage(value,totalSoldValue),value)));
+        valuesByColor.forEach((key,value)->valuesByColor.put(key,calculateColorPercentage(value,totalSoldValue)));
+        valuesByBrand.forEach((key,value)->valuesByBrand.put(key,calculateColorPercentage(value,totalSoldValue)));
 
-        statisticsViewModel.setSoldBicyclesValueTotal(totalSoldValue);
-        statisticsViewModel.setValuePartitionByColor(bicycleColorsValuePartition);
-        statisticsViewModel.setValuePartitionByBrand(bicycleBrandsValuePartition);
-        return statisticsViewModel;
+        statisticsView.put("totalSoldValue",totalSoldValue);
+        statisticsView.put("partByColor",valuesByColor);
+        statisticsView.put("partByBrand",valuesByBrand);
+
+        return statisticsView;
     }
 
-    private static void getSoldValuePerUnit(final HashMap<String, Double> values, final List<ReceiptModel> allReceipts, final int mode) {
+    private static void getSoldValuePerUnit_Brand(final HashMap<String, Double> values, final List<ReceiptModel> allReceipts) {
         Date date = new Date(System.currentTimeMillis());
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
@@ -51,9 +47,23 @@ public class StatisticsServiceImpl implements StatisticsService {
             calendar.setTime(r.getDateOfPurchase());
             if(calendar.get(Calendar.YEAR) == year){
                 for (BicycleModel b:r.getItems()) {
-                    String key = "";
-                    if(mode == 0) key = b.getColor();
-                    else if(mode == 1) key = b.getBrand().getName();
+                    String key = b.getBrand().getName();
+                    calculateValues(values, b, key);
+                }
+            }
+        }
+    }
+
+    private static void getSoldValuePerUnit_Color(final HashMap<String, Double> values, final List<ReceiptModel> allReceipts) {
+        Date date = new Date(System.currentTimeMillis());
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        for (ReceiptModel r: allReceipts) {
+            calendar.setTime(r.getDateOfPurchase());
+            if(calendar.get(Calendar.YEAR) == year){
+                for (BicycleModel b:r.getItems()) {
+                    String key = b.getColor();
                     calculateValues(values, b, key);
                 }
             }

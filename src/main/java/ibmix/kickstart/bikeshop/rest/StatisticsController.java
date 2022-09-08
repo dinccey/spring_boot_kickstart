@@ -1,10 +1,11 @@
 package ibmix.kickstart.bikeshop.rest;
 
-import ibmix.kickstart.bikeshop.repository.data.StatisticsViewModel;
 import ibmix.kickstart.bikeshop.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 @RestController
 public class StatisticsController {
@@ -13,7 +14,7 @@ public class StatisticsController {
     private StatisticsService statisticsService;
 
     @GetMapping(value = "/statistics",produces = "application/json")
-    public StatisticsViewModel getStatistics(){
+    public HashMap<String, Object> getStatistics(){
         return statisticsService.getStatistics();
     }
 }
