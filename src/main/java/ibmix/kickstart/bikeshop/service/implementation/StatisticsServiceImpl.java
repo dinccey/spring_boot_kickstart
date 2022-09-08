@@ -42,7 +42,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         return statisticsViewModel;
     }
 
-    private static void getSoldValuePerUnit(HashMap<String, Double> values, List<ReceiptModel> allReceipts, int mode) {
+    private static void getSoldValuePerUnit(final HashMap<String, Double> values, final List<ReceiptModel> allReceipts, final int mode) {
         Date date = new Date(System.currentTimeMillis());
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
@@ -60,7 +60,7 @@ public class StatisticsServiceImpl implements StatisticsService {
         }
     }
 
-    private static void calculateValues(HashMap<String, Double> values, BicycleModel b, String key) {
+    private static void calculateValues(final HashMap<String, Double> values,final BicycleModel b, final String key) {
         if(values.containsKey(key)){
             double priceValue = values.get(key);
             values.put(key, priceValue + b.getPrice());
