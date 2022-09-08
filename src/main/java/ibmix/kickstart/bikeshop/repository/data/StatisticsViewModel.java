@@ -12,5 +12,10 @@ public class StatisticsViewModel {
 
     @Getter
     @Setter
-    private List<ColorModel> valuePartitionByColorModel;
+    private List<ColorModel> valuePartitionByColor;
+
+    @Getter
+    @Setter
+    private  List<BrandStatisticsModel> valuePartitionByBrand;
+
 }
