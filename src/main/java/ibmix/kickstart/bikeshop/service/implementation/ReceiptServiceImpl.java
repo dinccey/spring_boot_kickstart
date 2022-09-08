@@ -7,7 +7,8 @@ import ibmix.kickstart.bikeshop.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     public ReceiptModel purchaseBicycles(final Set<BicycleModel> bicycles) {
         ReceiptModel receipt = new ReceiptModel();
-        Date dateOfPurchase = new Date(System.currentTimeMillis());
+        LocalDate dateOfPurchase = LocalDate.now();
         double totalPrice = bicycles.stream().mapToDouble(BicycleModel::getPrice).sum();
 
         receipt.setItems(bicycles);
@@ -35,7 +36,7 @@ public class ReceiptServiceImpl implements ReceiptService {
     }
 
     @Override
-    public List<ReceiptModel> getReceiptsByDate(final Date date) {
+    public List<ReceiptModel> getReceiptsByDate(final LocalDate date) {
         return receiptRepository.findAllByDateOfPurchase(date);
     }
 }

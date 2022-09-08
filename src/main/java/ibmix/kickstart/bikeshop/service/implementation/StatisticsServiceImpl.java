@@ -7,7 +7,7 @@ import ibmix.kickstart.bikeshop.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -39,13 +39,10 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     private static void getSoldValuePerUnit_Brand(final HashMap<String, Double> values, final List<ReceiptModel> allReceipts) {
-        Date date = new Date(System.currentTimeMillis());
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        int year = calendar.get(Calendar.YEAR);
+        //allReceipts.stream().
+
         for (ReceiptModel r: allReceipts) {
-            calendar.setTime(r.getDateOfPurchase());
-            if(calendar.get(Calendar.YEAR) == year){
+            if(r.getDateOfPurchase().getYear() == LocalDate.now().getYear()){
                 for (BicycleModel b:r.getItems()) {
                     String key = b.getBrand().getName();
                     calculateValues(values, b, key);
@@ -55,13 +52,8 @@ public class StatisticsServiceImpl implements StatisticsService {
     }
 
     private static void getSoldValuePerUnit_Color(final HashMap<String, Double> values, final List<ReceiptModel> allReceipts) {
-        Date date = new Date(System.currentTimeMillis());
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        int year = calendar.get(Calendar.YEAR);
         for (ReceiptModel r: allReceipts) {
-            calendar.setTime(r.getDateOfPurchase());
-            if(calendar.get(Calendar.YEAR) == year){
+            if(r.getDateOfPurchase().getYear() == LocalDate.now().getYear()){
                 for (BicycleModel b:r.getItems()) {
                     String key = b.getColor();
                     calculateValues(values, b, key);
