@@ -35,6 +35,7 @@ public class SpringSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers(HttpMethod.GET,"/bicycles");
+        return (web) -> web.ignoring()
+                .antMatchers(HttpMethod.GET);
     }
 }
