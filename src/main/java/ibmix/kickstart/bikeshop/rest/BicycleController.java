@@ -47,7 +47,6 @@ public class BicycleController {
         return bicycleService.getBicycleById(id);
     }
 
-    //@PreAuthorize("hasRole('USER')")
     @GetMapping(value="/bicycles/brand/{brand}")
     public List<BicycleModel> getBicyclesByBrand(@PathVariable final String brand){
         return bicycleService.getBicyclesByBrand(brand);
