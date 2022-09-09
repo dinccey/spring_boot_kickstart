@@ -22,6 +22,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableMethodSecurity(securedEnabled = false)
 public class SpringSecurityConfig {
+
     @Bean
     public SecurityFilterChain filterChain(final HttpSecurity http) throws Exception {
         http
@@ -31,6 +32,7 @@ public class SpringSecurityConfig {
                 .httpBasic(withDefaults());
         return http.build();
     }
+
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().antMatchers(HttpMethod.GET,"/bicycles");
