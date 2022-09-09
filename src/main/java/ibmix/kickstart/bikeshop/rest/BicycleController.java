@@ -33,15 +33,16 @@ public class BicycleController {
         return bicycleService.getAllBicycles();
     }
 
-
     @DeleteMapping(value = "/bicycles/{id}")
     public void deleteBicycle(@PathVariable final Long id){
         bicycleService.deleteBicycle(id);
     }
+
     @PutMapping(value = "/bicycles")
     public BicycleModel updateBicycle(@RequestBody final BicycleModel updatedBicycle){
         return bicycleService.updateBicycle(updatedBicycle);
     }
+
     @GetMapping(value = "/bicycles/{id}")
     public Optional<BicycleModel> getBicycle(@PathVariable final Long id){
         return bicycleService.getBicycleById(id);
