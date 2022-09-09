@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -24,7 +24,7 @@ public class ReceiptModel {
     @Getter
     @Setter
     @Column(name="date_of_purchase", nullable = false)
-    private Date dateOfPurchase;
+    private LocalDate dateOfPurchase;
 
     @Getter
     @Setter
