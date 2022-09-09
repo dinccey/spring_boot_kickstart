@@ -5,6 +5,9 @@ import ibmix.kickstart.bikeshop.repository.entities.ReceiptModel;
 import ibmix.kickstart.bikeshop.service.BicycleService;
 import ibmix.kickstart.bikeshop.service.ReceiptService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,6 +33,7 @@ public class BicycleController {
         return bicycleService.getAllBicycles();
     }
 
+
     @DeleteMapping(value = "/bicycles/{id}")
     public void deleteBicycle(@PathVariable final Long id){
         bicycleService.deleteBicycle(id);
@@ -43,6 +47,7 @@ public class BicycleController {
         return bicycleService.getBicycleById(id);
     }
 
+    //@PreAuthorize("hasRole('USER')")
     @GetMapping(value="/bicycles/brand/{brand}")
     public List<BicycleModel> getBicyclesByBrand(@PathVariable final String brand){
         return bicycleService.getBicyclesByBrand(brand);
