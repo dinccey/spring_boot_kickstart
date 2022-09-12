@@ -14,6 +14,7 @@ import static org.hibernate.tool.schema.SchemaToolingLogging.LOGGER;
 
 @org.springframework.web.bind.annotation.ControllerAdvice
 public class ControllerAdvice {
+
     @ExceptionHandler({InvalidFormatException.class, MismatchedInputException.class})
     public void handlerIllegalArgumentException(JsonProcessingException exception,
                                                 ServletWebRequest webRequest) throws IOException {
@@ -28,7 +29,7 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler({SQLException.class})
-    public void handlerSqlException(SQLException exception, ServletWebRequest webRequest) throws IOException{
+    public void handlerSqlException(SQLException exception, ServletWebRequest webRequest) throws IOException {
         webRequest.getResponse().sendError(HttpStatus.NOT_MODIFIED.value(),exception.getMessage());
     }
 
