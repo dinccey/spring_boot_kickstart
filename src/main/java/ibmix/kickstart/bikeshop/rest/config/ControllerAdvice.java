@@ -30,6 +30,7 @@ public class ControllerAdvice {
 
     @ExceptionHandler({SQLException.class})
     public void handlerSqlException(SQLException exception, ServletWebRequest webRequest) throws IOException {
+        LOGGER.error(exception.getMessage(), exception);
         webRequest.getResponse().sendError(HttpStatus.NOT_MODIFIED.value(),exception.getMessage());
     }
 
